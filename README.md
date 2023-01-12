@@ -1,7 +1,8 @@
-# redBikeTiming
+# ![icon](https://remote.rslt.live/static/img/redbiketiming_icon.png)redBikeTiming
 ## _Fullstack electronic timing system_
 
-[![N|Solid](https://remote.rslt.live/static/redbiketiming.png)](https://remote.rslt.live)
+[![logo](https://remote.rslt.live/static/img/redbiketiming.png)](https://remote.rslt.live)
+
 
 ## Features
 - Using this system, you can register participants via a web interface or upload a list.  You can make changes at any time.
