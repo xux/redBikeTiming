@@ -15,7 +15,7 @@
 
 Fell free to contact for any support or requests here or by mail.
 
-Features presentation available [here](presentations/[resentation.pdf]).
+Features presentation available [here](presentation/presentation.pdf).
 
 
 ## Installation
