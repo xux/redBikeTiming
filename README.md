@@ -20,7 +20,7 @@ Features presentation available [here](presentation/presentation.pdf).
 
 ## Installation
 
-Software is distributed as compiled executable file. Just download `build` folder and run.
+Software is distributed as compiled executable file (for Win64). Just download `win64` folder and run.
 
 ```sh
 redbiketiming.exe
