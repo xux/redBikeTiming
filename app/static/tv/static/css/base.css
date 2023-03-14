@@ -1,0 +1,251 @@
+html {
+	position: relative;
+	min-height: 100%;
+}
+body {
+	min-height: 500px;
+	padding-top: 70px;
+	margin-bottom: 100px !important;
+	background: url("/static/img/wavegrid.png") repeat scroll 0px 0px transparent;
+}
+body.iframe {
+	padding-top: 0;
+	margin-bottom: 0 !important;
+}
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+}
+#back2top {
+	position: fixed;
+	top: auto;
+	bottom: 0;
+	right: 0;
+	margin: 10px;
+	z-index: 100;
+	display: none;
+}
+
+#body_header #logo {
+	height: 100%;
+}
+
+#submenu {
+	max-width: 500px;
+}
+
+#race_submenu {
+	max-width: 500px;
+}
+.label-l-t{
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+table {
+	color: black;
+	overflow: hidden;
+}
+table thead{
+	background-color: #8dadcc;
+}
+
+.anchor::before {
+	content : "";
+	display : block;
+	height : 40px;
+	margin : -40px 0 0;
+}
+
+.auto_numbering tbody tr {
+	counter-increment: rowNumber;
+}
+
+.auto_numbering tbody tr td:first-child::before {
+	content: counter(rowNumber);
+	min-width: 3em;
+	margin-right: 0.5em;
+}
+
+
+
+
+.advanced { display: none; }
+
+.advanced-visible .advanced { display: block; }
+.advanced-visible .not-advanced { display: none; }
+
+.chart {
+	height: 600px;
+}
+.edit {
+	font-size: smaller;
+}
+
+#graphs .graphic {
+	height: 600px;
+}
+
+.m-0 {
+	margin: 0;
+}
+.p-0 {
+	padding: 0;
+}
+.b-0 {
+	border: 0;
+	border-radius: 0;
+}
+.p-r-15 {
+	padding-right: 15px;
+}
+.m-b-15 {
+	margin-bottom: 15px;
+}
+.m-t-15 {
+	margin-top: 15px;
+}
+.o-x {
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+.o-none {
+	overflow: hidden;
+}
+table .small {
+	display: none;
+}
+
+
+.width-auto {
+	width: auto;
+	
+}
+
+hr {
+	-moz-border-bottom-colors: none;
+	-moz-border-image: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+	border-style: solid none;
+	border-width: 1px 0;
+	margin: 18px 0;
+}
+
+
+#race_submenu li:not(:first-child):not(:last-child) a {
+	border-radius: 0;
+}
+#race_submenu li:first-child a {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+#race_submenu li:last-child a {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+table.table {
+	white-space: nowrap;
+}
+
+
+#result .name {
+	text-align: left;
+}
+#result .year,
+#result .city,
+#result .team,
+#result .delay,
+#result .total,
+#result .position {
+	text-align: left;
+	font-size: 80%;
+	color: #3C3C3C;
+}
+#result .year { float: right;}
+#result .delay,
+#result .total,
+#result .position {
+	text-align: center;
+}
+
+.thumbnail img {
+	min-height: 100px;
+}
+
+a.white-link:link {color: white; text-decoration: none;}
+a.white-link:visited {color: white; text-decoration: none;}
+a.white-link:active {color: #CE0326; text-decoration: none;}
+a.white-link:hover {color: #CE0326; text-decoration: none;}
+
+#PhotoNumbers form {
+	color: black;
+	display: inline;
+}
+
+#body_wrap #content img, #body_wrap #content iframe {
+	max-width: 100%;
+}
+
+
+
+.form-group .img {
+	width: 200px;
+	max-width: 100%;
+	border: solid 1px #ccc;
+}
+.form-group .img.empty {
+	height: 200px;
+}
+
+.vcenter {
+	display: inline-block;
+	vertical-align: middle;
+	float: none;
+}
+.vertical-align {
+	display: flex;
+	align-items: center;
+}
+.btn-back {
+	display: none;
+}
+.pay-update {
+	display:none;
+}
+
+.loader {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(100, 100, 100, 0.5);
+	z-index: 1000;
+}
+.loader i {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -32px;
+	margin-top: -32px;
+	font-size: 64px;
+}
+
+.dot {
+	height: 8px;
+	width: 8px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	margin: 2px;
+}
+.dot.active {
+	background-color: #8dadcc;
+}

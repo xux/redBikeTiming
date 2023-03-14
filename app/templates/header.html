@@ -1,0 +1,89 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="/">redBikeTiming</a>
+	{%if RACE%}
+	<a class="navbar-brand" href="{{url_for("race", race_id=RACE.getID())}}"><small id="race" class="text-info">{{RACE.caption()}}</small></a>
+	{%endif%}
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			{%if RACE%}
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("race_startlist", race_id=RACE.getID())}}">{%trans%}Start list{%endtrans%}</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="{{url_for("race_results", race_id=RACE.getID())}}" id="resultsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}Results{%endtrans%}</a>
+				<div class="dropdown-menu" aria-labelledby="resultsDropdown">
+					<a class="dropdown-item" href="{{url_for("race_results", race_id=RACE.getID())}}">{%trans%}General{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("race_results_laps", race_id=RACE.getID())}}">{%trans%}Laps{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("results_simple", race_id=RACE.getID())}}">{%trans%}Simple HTML{%endtrans%}</a>
+					<div class="dropdown-divider"></div>
+					{% for category in RACE.RaceResults.getCategories() %}
+						<a class="dropdown-item" href="{{url_for("race_results", category=category, race_id=RACE.getID())}}">{{category}}</a>
+					{%endfor%}
+				</div>
+			</li>			
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("race_laps", race_id=RACE.getID())}}">{%trans%}Laps{%endtrans%}</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("splits", race_id=RACE.getID())}}">{%trans%}Splits{%endtrans%}</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="manualDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}Manual{%endtrans%}</a>
+				<div class="dropdown-menu" aria-labelledby="manualDropdown">
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="splits")}}">{%trans%}Splits{%endtrans%}</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="start")}}">{%trans%}Start{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="finished")}}">{%trans%}Finished{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="finished-DNS")}}">{%trans%}DNS{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="finished-DNF")}}">{%trans%}DNF{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="finished-DSQ")}}">{%trans%}DSQ{%endtrans%}</a>
+					<a class="dropdown-item" href="{{url_for("splits_manual", race_id=RACE.getID(), t="interim")}}">{%trans%}Intermediate{%endtrans%}</a>
+				</div>
+			</li>			
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("race_config", race_id=RACE.getID())}}">{%trans%}Config{%endtrans%}</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("tv4", race_id=RACE.getID())}}">{%trans%}TV{%endtrans%}</a>
+			</li>
+			{%endif%}
+			{%if has_url_for("llrp")%}
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("llrp")}}">{%trans%}Readers{%endtrans%}</a>
+			</li>
+			{%endif%}
+			{%if RACE%}
+			<li class="nav-item">
+				<a class="nav-link" href="{{url_for("mobile_app", race_id=RACE.getID())}}">{%trans%}Mobile app{%endtrans%}</a>
+			</li>
+			{%endif%}
+			{%for link in LocalConfig().Headers%}
+			{%if not link.disabled%}
+			<li class="nav-item {%if link.text%}dropdown{%endif%}">
+				<a class="nav-link {%if link.text%}dropdown-toggle{%endif%}" id="HeaderLinkItem{{loop.index}}" {%if link.text%}role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {%endif%} href="{{link.url}}">{{link.link}} {%if link.icon%}<i class="fas {{link.icon}}"></i>{%endif%}</a>
+				{%if link.text%}
+					<div class="dropdown-menu" aria-labelledby="HeaderLinkItem{{loop.index}}">
+						{{link.text}}
+
+					</div>
+				{%endif%}
+			</li>
+			{%endif%}
+			{%endfor%}
+		</ul>
+	</div>
+    <div class="collapse navbar-collapse order-2">
+        <ul class="navbar-nav ml-auto">
+			{%if isPassSet() and RACE%}
+            <li class="nav-item">
+                <a class="nav-link btn btn-light btn-lg" href="{{url_for("race_logout", race_id=RACE.getID())}}"><i class="fas fa-sign-out-alt"></i></a>
+            </li>
+			{%endif%}
+        </ul>
+    </div>	
+</nav>
+
+<a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top" role="button"><i class="fas fa-chevron-up"></i></a>

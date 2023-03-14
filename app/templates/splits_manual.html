@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Manual Splits{% endtrans%}{% endblock %}
+
+{% block body %}
+
+<div class="fixed-bottom">
+	<button id="sender" class="btn btn-primary" onClick="sendData(true)"><i class="fa fa-minus"></i></button>
+	{% set option_help = 'Manual Splits'|KeyTextHelp %}
+	{%if option_help%}
+		<button type="button" class="btn" data-container="body" data-html="true" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="{{option_help}}"><i class="fa fa-question-circle"></i></button>
+	{%endif%}
+</div>
+{%with URL="splits_manual", ALL=False%}
+	{%include "include_dbs.html"%}
+{%endwith%}
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+	<table class="table table-hover" id="tableData">
+		<thead>
+		<tr>
+			<th data-field="number">{%trans%}BIB{%endtrans%}</th>
+			<th data-field="time">{%trans%}Time{%endtrans%}</th>
+		</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(function(){
+	enableAPI('{{RACE.getID()}}');
+	InitManualSplits('tableData', '{{SPLITS_PREFFIX}}_{{TYPE}}_{{DB}}', '{{TYPE}}');
+});
+</script>
+
+{% endblock %}

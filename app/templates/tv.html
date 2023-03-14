@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Online results - redBikeTiming</title>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+}    
+.parent {
+	position: fixed;
+    box-sizing: border-box;
+    min-width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.child {
+	position: absolute;
+    box-sizing: border-box;
+    min-width: 100%;
+    min-height: 100%;
+{%if PADDING %}    
+    padding-left: {{PADDING[0]}}px;
+    padding-top: {{PADDING[1]}}px;
+    padding-right: {{PADDING[2]}}px;
+    padding-bottom: {{PADDING[3]}}px;
+{%endif%}
+}
+{%if QR %}    
+.qr {
+	position: absolute; 
+{% if QR[0] > 0 %}
+	left: {{QR[0]}}px;
+{%else%}
+	right: {{0-QR[0]}}px;
+{%endif%} 
+{% if QR[1] > 0 %}
+	top: {{QR[1]}}px;
+{%else%}
+	bottom: {{0-QR[1]}}px;
+{%endif%} 
+{%endif%}
+}
+</style>
+</head>
+<body>
+{%if not URL%}
+	<form method="get">
+		<p>
+			url:
+			<input type="text" size="40" name="url">
+			<input type="text" size="40" name="padding" value="[50,50,50,50]">
+		</p>
+		<p>
+			qrurl:
+			<input type="text" size="40" name="qrurl">
+			<input type="text" size="40" name="qr"  value="[-100, -100]">
+		</p>
+		<p>
+			<input type="submit" value="OK">
+		</p>
+	</form>
+{%else%}
+<div class="parent">
+	<iframe src="{{URL}}?tv" frameBorder="0" class="child"></iframe>
+</div>
+{%if QR%}
+<div class="qr">
+	<img src="{{ qrcode(QR_URL) }}">
+	<h5>{{QR_URL}}</h5>
+</div>
+{%endif%}	
+{%endif%}    
+</body>
+</html>

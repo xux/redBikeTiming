@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block body %}
+<h4 class="page-header">Редактировать</h4>
+<form id="send_room" method="POST" action='/#'>
+	<input type="hidden" name="action" value="edit_racer">
+	<input type="hidden" name="id" value="{{RACER.getID()}}">
+		{%with EDIT="true"%}
+		{%for FIELD in RACER.getStructedFields()%}
+		{%if FIELD.1.visible %}
+			{%include "racer_field.html" %}
+		{%endif%}
+		{%endfor%}
+		{%endwith%}
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary" id="submit" name="submit_v">OK</button>
+		<button type="submit" class="btn btn-default" id="submit" name="submit_v" value="cancel">Закрыть</button>
+	</div>
+</form>
+{% endblock %}
+

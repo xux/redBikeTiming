@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Start List{% endtrans%} - redBikeTiming{% endblock %}
+
+{% block body %}
+<h4 class="page-header">Стартовый список</h4>
+<table class="table table-bordered table-hover">
+	<tr>
+		<th></th>
+	{%for field in RACE.StartList.getColumns()%}
+		<th id="column{{field.getID()}}">
+			{{field.title}}
+			<small><a href="#" onclick="return editStartColumn('{{field.getID()}}');">Править</a></small>
+		</th>
+	{%endfor%}
+	</tr>
+
+{{RACE.racers.data}}
+{%for RACER in RACE.racers.data%}
+<tr id="{{RACER.getHTMLID()}}">
+{{RACER}}
+	{%include "racer_table_row.html"%}
+</tr>
+{%endfor%}
+</table>
+{% endblock %}
+

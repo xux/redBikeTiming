@@ -1,0 +1,694 @@
+# Russian translations for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2023-01-25 12:49+0300\n"
+"PO-Revision-Date: 2022-11-02 12:06+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: KeysText.py:7
+msgid "Yes"
+msgstr "Да"
+
+#: KeysText.py:8
+msgid "No"
+msgstr "Нет"
+
+#: KeysText.py:9
+msgid "Dead Time (ms)"
+msgstr "Время неактивности (мс)"
+
+#: KeysText.py:10
+msgid "Notify Each (ms)"
+msgstr "Оповещать каждые (мс)"
+
+#: KeysText.py:11
+msgid "Update Timeout (ms)"
+msgstr "Период обновления (мс)"
+
+#: KeysText.py:12 templates/race_config.html:105 templates/race_config.html:116
+#: templates/race_config_.html:178 templates/race_config_.html:189
+msgid "Title"
+msgstr "Название"
+
+#: KeysText.py:13
+msgid "Number Filter"
+msgstr "Фильтр Номера"
+
+#: KeysText.py:14
+msgid "Split Group Time (s)"
+msgstr "Группировать отсечки по времени (с)"
+
+#: KeysText.py:15
+msgid "Min Lap Time (s)"
+msgstr "Мин Время круга (с)"
+
+#: KeysText.py:16
+msgid "Zero Lap"
+msgstr "Нулевой круг"
+
+#: KeysText.py:17
+msgid "Min Zero Lap Time (s)"
+msgstr "Мин время нулевого круга"
+
+#: KeysText.py:18
+msgid "Colorize Multiplier (5 - recommend)"
+msgstr "Множитель раскраски (5 - рекомендованно)"
+
+#: KeysText.py:19
+msgid "Start List Download Link"
+msgstr "Ссылка скачки стартового списка"
+
+#: KeysText.py:20
+msgid "Results Upload Link"
+msgstr "Ссылка загрузки результатов"
+
+#: KeysText.py:21
+msgid "Results Upload Template"
+msgstr "Шаблон загрузки результатов"
+
+#: KeysText.py:22
+msgid "Results Upload Timeout"
+msgstr "Период загрузки результатов"
+
+#: KeysText.py:23
+msgid "Results QR Link"
+msgstr "QR код результатов"
+
+#: KeysText.py:24
+msgid "Results Include General"
+msgstr "Показывать Абсолют"
+
+#: KeysText.py:25
+msgid "Results Show Empty"
+msgstr "Показывать пустые результаты"
+
+#: KeysText.py:26
+msgid "Results Show Laps"
+msgstr "Показывать круги в результатах"
+
+#: KeysText.py:27
+msgid "Rows Count"
+msgstr "Колличество строк"
+
+#: KeysText.py:28
+msgid "Scale"
+msgstr "Масштаб"
+
+#: KeysText.py:29
+msgid "Scroll Timeout"
+msgstr "Период прокрутки"
+
+#: KeysText.py:30
+msgid "Padding"
+msgstr "Отступ"
+
+#: KeysText.py:31
+msgid "QR Shift"
+msgstr "Смещение QR кода"
+
+#: KeysText.py:32
+msgid "URL"
+msgstr "Ссылка"
+
+#: KeysText.py:33
+msgid "Timeout (s)"
+msgstr "Задержка (с)"
+
+#: KeysText.py:34
+msgid "Settings"
+msgstr "Настройки"
+
+#: KeysText.py:35
+msgid "StartList"
+msgstr "Стартовый список"
+
+#: KeysText.py:36 templates/header.html:31 templates/header.html:36
+#: templates/race_clear.html:16 templates/race_laps.html:17
+#: templates/splits.html:2
+msgid "Splits"
+msgstr "Отсечки"
+
+#: KeysText.py:37 templates/race_password.html:12
+msgid "Password"
+msgstr "Пароль"
+
+#: KeysText.py:38
+msgid "Receive"
+msgstr "Получать"
+
+#: KeysText.py:39
+msgid "Send"
+msgstr "Отправлять"
+
+#: KeysText.py:44
+msgid "redBikeTiming"
+msgstr ""
+
+#: KeysText.py:47
+msgid ""
+"Mask the bib. Could be used <b>?</b> to replace 1 character or <b>*</b> "
+"for any."
+msgstr "Маска номера. <b>?</b> зменяет 1 символ или <b>*</b> для нескольких."
+
+#: KeysText.py:48
+msgid ""
+"Keys:<br><b>Arrows</b> - to move<br><b>Space</b> or <b>+</b> - "
+"split<br><b>Enter</b> - next bib<br><b>Arrows</b> - to move<br>type to "
+"enter bib or <b>backspace</b> to delete on selected row<br><b>F1</b> or "
+"<b>*</b> - to save<br><b>F6</b> or <b>=</b> - edit BIB<br><b>F7</b> or "
+"<b>/</b> - edit time"
+msgstr ""
+
+#: app.py:163
+msgid "Racers cleared."
+msgstr "Гонщики удалены."
+
+#: app.py:167
+#, python-format
+msgid "DB %s cleared."
+msgstr "БД %s очищена."
+
+#: app.py:242 app.py:253
+msgid "Startlist loaded"
+msgstr "Стартовый список загружен"
+
+#: app.py:244 app.py:255
+msgid "Startlist not loaded"
+msgstr "Стартовый список не загружен"
+
+#: app.py:258
+msgid "Results Cleared."
+msgstr "Результаты очищены."
+
+#: flask_utils.py:135
+msgid "Race not exists"
+msgstr "Гонка не существует"
+
+#: flask_utils.py:142
+msgid "Access denied"
+msgstr "Доступ запрещен"
+
+#: templates/_start_list.html:2
+msgid "Start List"
+msgstr "Стартовый список"
+
+#: templates/about.html:2
+msgid "About"
+msgstr "О программе"
+
+#: templates/about.html:12
+msgid "Online server"
+msgstr "Онлайн сервер"
+
+#: templates/about.html:15
+msgid "redBikeTiming on GitHub"
+msgstr "redBikeTiming на GitHub"
+
+#: templates/about.html:18
+msgid "Download android application"
+msgstr "Скачать Android Приложение"
+
+#: templates/header.html:13 templates/race_clear.html:12
+#: templates/race_config.html:81 templates/race_config_.html:154
+#: templates/race_startlist.html:2
+msgid "Start list"
+msgstr "Стартовый список"
+
+#: templates/header.html:16 templates/race_results.html:2
+msgid "Results"
+msgstr "Результаты"
+
+#: templates/header.html:18 templates/table.html:124
+msgid "General"
+msgstr "Абсолют"
+
+#: templates/header.html:19 templates/header.html:28 templates/race_laps.html:2
+#: templates/race_results_laps.html:2
+msgid "Laps"
+msgstr "Круги"
+
+#: templates/header.html:20
+msgid "Simple HTML"
+msgstr "Простой HTML"
+
+#: templates/header.html:34
+msgid "Manual"
+msgstr "Ручные"
+
+#: templates/header.html:38
+msgid "Start"
+msgstr "Старт"
+
+#: templates/header.html:39
+msgid "Finished"
+msgstr "Финишировали"
+
+#: templates/header.html:40
+msgid "DNS"
+msgstr ""
+
+#: templates/header.html:41
+msgid "DNF"
+msgstr ""
+
+#: templates/header.html:42
+msgid "DSQ"
+msgstr ""
+
+#: templates/header.html:43
+msgid "Intermediate"
+msgstr "Промежуточная"
+
+#: templates/header.html:47 templates/llrp.html:28 templates/race_config.html:2
+#: templates/race_config_.html:2
+msgid "Config"
+msgstr "Конфигурация"
+
+#: templates/header.html:50 templates/race_config.html:465
+#: templates/race_config_.html:543
+msgid "TV"
+msgstr "ТВ"
+
+#: templates/header.html:55 templates/race_config_.html:98
+msgid "Readers"
+msgstr "Сканеры"
+
+#: templates/header.html:60 templates/mobile_app.html:2
+msgid "Mobile app"
+msgstr "Мобильное приложение"
+
+#: templates/include_dbs.html:8 templates/include_dbs.html:10
+msgid "All"
+msgstr "Все"
+
+#: templates/include_dbs.html:29 templates/include_dbs.html:31
+#: templates/llrp.html:67 templates/race_config.html:51
+#: templates/race_config.html:163 templates/race_config.html:274
+#: templates/race_config.html:355 templates/race_config.html:396
+#: templates/race_config_.html:48 templates/race_config_.html:88
+#: templates/race_config_.html:126 templates/race_config_.html:236
+#: templates/race_config_.html:347 templates/race_config_.html:428
+#: templates/race_config_.html:469
+msgid "Add"
+msgstr "Добавить"
+
+#: templates/llrp.html:37 templates/race_config.html:14
+#: templates/race_config_.html:12
+msgid "Race select"
+msgstr "Выбор гонки"
+
+#: templates/llrp.html:82 templates/race_config.html:509
+#: templates/race_config_.html:587
+msgid "Save"
+msgstr "Сохранить"
+
+#: templates/mobile_app.html:12
+msgid "Scan from Mobile App"
+msgstr "Сканировать из мобильного приложения"
+
+#: templates/mobile_app.html:21
+msgid "Send data to mobile app"
+msgstr "Отправить данные в мобильное приложение"
+
+#: templates/mobile_app.html:29
+msgid "Download Mobile App"
+msgstr "Скачать мобильное приложение"
+
+#: templates/mobile_app.html:37
+msgid "Download"
+msgstr "Скачать"
+
+#: templates/race_clear.html:2
+msgid "Clear race"
+msgstr "Очистить гонку"
+
+#: templates/race_clear.html:9
+msgid "What clear?"
+msgstr "Что очистить?"
+
+#: templates/race_clear.html:24
+msgid "Clear"
+msgstr "Очистить"
+
+#: templates/race_config.html:10 templates/race_config_.html:9
+msgid "Global Settings"
+msgstr "Глобальные настройки"
+
+#: templates/race_config.html:23 templates/race_config_.html:60
+msgid "Panel"
+msgstr "Табло"
+
+#: templates/race_config.html:76 templates/race_config_.html:149
+msgid "Race Settings"
+msgstr "Настройки гонки"
+
+#: templates/race_config.html:86 templates/race_config_.html:159
+msgid "Upload"
+msgstr "Загрузить"
+
+#: templates/race_config.html:97 templates/race_config_.html:170
+msgid "Start columns"
+msgstr "Стартовые колонки"
+
+#: templates/race_config.html:106 templates/race_config.html:117
+#: templates/race_config.html:122 templates/race_config.html:142
+#: templates/race_config.html:147 templates/race_config.html:184
+#: templates/race_config.html:201 templates/race_config.html:212
+#: templates/race_config.html:220 templates/race_config.html:242
+#: templates/race_config.html:253 templates/race_config.html:261
+#: templates/race_config.html:295 templates/race_config.html:304
+#: templates/race_config.html:310 templates/race_config.html:315
+#: templates/race_config.html:331 templates/race_config.html:337
+#: templates/race_config.html:342 templates/race_config_.html:27
+#: templates/race_config_.html:39 templates/race_config_.html:179
+#: templates/race_config_.html:190 templates/race_config_.html:195
+#: templates/race_config_.html:215 templates/race_config_.html:220
+#: templates/race_config_.html:257 templates/race_config_.html:274
+#: templates/race_config_.html:285 templates/race_config_.html:293
+#: templates/race_config_.html:315 templates/race_config_.html:326
+#: templates/race_config_.html:334 templates/race_config_.html:368
+#: templates/race_config_.html:377 templates/race_config_.html:383
+#: templates/race_config_.html:388 templates/race_config_.html:404
+#: templates/race_config_.html:410 templates/race_config_.html:415
+msgid "Type"
+msgstr "Тип"
+
+#: templates/race_config.html:107 templates/race_config_.html:180
+msgid "Editor"
+msgstr ""
+
+#: templates/race_config.html:108 templates/race_config_.html:181
+msgid "For results"
+msgstr ""
+
+#: templates/race_config.html:109 templates/race_config.html:130
+#: templates/race_config_.html:182 templates/race_config_.html:203
+msgid "Full data"
+msgstr "Все параметры"
+
+#: templates/race_config.html:141 templates/race_config_.html:214
+msgid "Field"
+msgstr "Поле"
+
+#: templates/race_config.html:175 templates/race_config_.html:248
+msgid "Start times"
+msgstr "Стартовые времена"
+
+#: templates/race_config.html:183 templates/race_config.html:196
+#: templates/race_config.html:237 templates/race_config_.html:256
+#: templates/race_config_.html:269 templates/race_config_.html:310
+#: templates/race_laps.html:12 templates/splits_manual.html:22
+msgid "Time"
+msgstr "Время"
+
+#: templates/race_config.html:185 templates/race_config_.html:258
+msgid "Time Shift"
+msgstr ""
+
+#: templates/race_config.html:186 templates/race_config_.html:259
+msgid "Default Shift"
+msgstr ""
+
+#: templates/race_config.html:187 templates/race_config_.html:260
+msgid "Default Shift Base"
+msgstr ""
+
+#: templates/race_config.html:188 templates/race_config.html:218
+#: templates/race_config.html:259 templates/race_config_.html:261
+#: templates/race_config_.html:291 templates/race_config_.html:332
+#: templates/race_laps.html:14
+msgid "Lap"
+msgstr "Круг"
+
+#: templates/race_config.html:189 templates/race_config.html:298
+#: templates/race_config_.html:262 templates/race_config_.html:371
+msgid "Who"
+msgstr "Кто"
+
+#: templates/race_config.html:198 templates/race_config.html:239
+#: templates/race_config.html:419 templates/race_config_.html:271
+#: templates/race_config_.html:312 templates/race_config_.html:494
+msgid "Now"
+msgstr "Сейчас"
+
+#: templates/race_config.html:210 templates/race_config.html:251
+#: templates/race_config.html:424 templates/race_config_.html:283
+#: templates/race_config_.html:324 templates/race_config_.html:499
+msgid "HH:MM:SS"
+msgstr "ЧЧ:ММ:СС"
+
+#: templates/race_config.html:225 templates/race_config.html:266
+#: templates/race_config.html:320 templates/race_config.html:347
+#: templates/race_config_.html:298 templates/race_config_.html:339
+#: templates/race_config_.html:393 templates/race_config_.html:420
+msgid "Who value"
+msgstr "Значение кто"
+
+#: templates/race_config.html:287 templates/race_config_.html:360
+msgid "Finish Limits"
+msgstr "Финишные ограничения"
+
+#: templates/race_config.html:296 templates/race_config.html:309
+#: templates/race_config.html:336 templates/race_config_.html:369
+#: templates/race_config_.html:382 templates/race_config_.html:409
+msgid "Limit"
+msgstr "Ограничение"
+
+#: templates/race_config.html:297 templates/race_config_.html:370
+msgid "Dimension"
+msgstr "Размерность"
+
+#: templates/race_config.html:368 templates/race_config_.html:441
+msgid "Categories"
+msgstr "Категории"
+
+#: templates/race_config.html:377 templates/race_config.html:388
+#: templates/race_config_.html:450 templates/race_config_.html:461
+msgid "Category"
+msgstr "Категория"
+
+#: templates/race_config.html:479 templates/race_config_.html:557
+msgid "Synchronization"
+msgstr "Синхронизация"
+
+#: templates/race_config.html:516 templates/race_config_.html:594
+msgid "Service"
+msgstr "Сервис"
+
+#: templates/race_config.html:519 templates/race_config_.html:597
+msgid "Refresh race"
+msgstr ""
+
+#: templates/race_config.html:522 templates/race_config_.html:600
+msgid "Recalc Results"
+msgstr "Пересчитать результаты"
+
+#: templates/race_config.html:525 templates/race_config_.html:603
+msgid "Download Start List"
+msgstr "Скачать стартовый список"
+
+#: templates/race_config.html:530 templates/race_config_.html:608
+msgid "Online results"
+msgstr "Онлайн результаты"
+
+#: templates/race_config.html:534 templates/race_config_.html:612
+msgid "Download results.xls"
+msgstr "Скачать results.xls"
+
+#: templates/race_config.html:537 templates/race_config_.html:615
+msgid "Clear Race"
+msgstr "Очистить гонку"
+
+#: templates/race_config.html:540 templates/race_config_.html:618
+msgid "Download Race Folder"
+msgstr "Скачать папку с гонкой"
+
+#: templates/race_config.html:545 templates/race_config_.html:623
+msgid "Restart HTTP"
+msgstr "Перезапустить HTTP"
+
+#: templates/race_config.html:548 templates/race_config_.html:626
+msgid "Restart LLRP"
+msgstr "Перезапустить LLRP"
+
+#: templates/race_config.html:551 templates/race_config_.html:629
+msgid "Restart MUSIC"
+msgstr "Перезапустить MUSIC"
+
+#: templates/race_config.html:554 templates/race_config_.html:632
+msgid "Sync panels"
+msgstr "Синхронизовать табло"
+
+#: templates/race_config.html:557 templates/race_config_.html:635
+msgid "Sync Time"
+msgstr "Синхронизовать время"
+
+#: templates/race_config.html:566 templates/race_config_.html:645
+msgid "Server time: "
+msgstr "Серверное время: "
+
+#: templates/race_config_.html:18
+msgid "Start List Column Values"
+msgstr "Значения стартовых колонок"
+
+#: templates/race_config_.html:28 templates/race_config_.html:40
+msgid "Option"
+msgstr "Опция"
+
+#: templates/race_laps.html:11 templates/splits_manual.html:21
+msgid "BIB"
+msgstr "Номер"
+
+#: templates/race_laps.html:13 templates/splits.html:17
+msgid "Peak"
+msgstr "Пик"
+
+#: templates/race_laps.html:15
+msgid "Lap Time"
+msgstr "Время круга"
+
+#: templates/race_laps.html:16
+msgid "Total Time"
+msgstr "Общее время"
+
+#: templates/race_laps.html:32
+msgid "'Ignore Split'"
+msgstr "'Игнорировать отсечку'"
+
+#: templates/race_laps.html:33
+msgid "'Ignore Group'"
+msgstr "'Игнорировать группу'"
+
+#: templates/race_laps.html:34
+msgid "'New Lap'"
+msgstr "'Новый круг'"
+
+#: templates/race_laps.html:35
+msgid "'Start Split'"
+msgstr "'Стартовая отсечка'"
+
+#: templates/race_laps.html:36
+msgid "'Intermediate Split'"
+msgstr "'Промежуточная отсечка'"
+
+#: templates/race_laps.html:37
+msgid "'Finish Split'"
+msgstr "'Финишная отсечка'"
+
+#: templates/race_laps.html:38
+msgid "'Finished Before Split'"
+msgstr "'Финишировал ранее отсечки'"
+
+#: templates/race_laps.html:39
+msgid "'Use Split'"
+msgstr "'Использовать эту отсечку'"
+
+#: templates/race_password.html:2 templates/race_password.html:8
+msgid "Enter race password"
+msgstr "Введите пароль гонки"
+
+#: templates/race_password.html:14
+msgid "Enter"
+msgstr "Войти"
+
+#: templates/race_select.html:2 templates/race_select.html:7
+msgid "Select race"
+msgstr "Выбрать гонку"
+
+#: templates/race_select.html:16
+msgid "New race"
+msgstr "Новая гонка"
+
+#: templates/race_select.html:26
+msgid "Create"
+msgstr "Создать"
+
+#: templates/splits.html:14
+msgid "Tag"
+msgstr "Метка"
+
+#: templates/splits.html:15
+msgid "First Time"
+msgstr "Первое Время"
+
+#: templates/splits.html:16
+msgid "Last Time"
+msgstr "Последние Время"
+
+#: templates/splits.html:18
+msgid "Peak Time"
+msgstr "Пиковой Время"
+
+#: templates/splits.html:19
+msgid "Info"
+msgstr "Инфо"
+
+#: templates/splits_manual.html:2
+msgid "Manual Splits"
+msgstr "Ручные отсечки"
+
+#: templates/table.html:97
+msgid "Error"
+msgstr "Ошибка"
+
+#: templates/table.html:99
+msgid "Wait"
+msgstr "Ожидайте"
+
+#: templates/tv_uploader.html:2
+msgid "Results TV"
+msgstr "ТВ результаты"
+
+#~ msgid "About"
+#~ msgstr "О нас"
+
+#~ msgid "Basic Settings"
+#~ msgstr "Основные настройки"
+
+#~ msgid "Start List Fields"
+#~ msgstr "Поля Сатртового Списка"
+
+#~ msgid "Name"
+#~ msgstr "Имя"
+
+#~ msgid "Show order"
+#~ msgstr "Порядок Показа"
+
+#~ msgid "Start list order"
+#~ msgstr "Порядок Стартового Списка"
+
+#~ msgid "New"
+#~ msgstr "Новый"
+
+#~ msgid "Destroy"
+#~ msgstr "Уничтожить"
+
+#~ msgid "Cancel"
+#~ msgstr "Отмена"
+
+#~ msgid "Download start list"
+#~ msgstr "Скачать Стартовый список"
+
+#~ msgid "Main"
+#~ msgstr "Главное"
+
+#~ msgid "Open link from mobile app"
+#~ msgstr "Откройте ссылку из мобильного приложения"
+
+#~ msgid "Reader"
+#~ msgstr "Сканнер"
+

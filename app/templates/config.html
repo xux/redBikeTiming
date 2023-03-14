@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Config{% endtrans%} - redBikeTiming{% endblock %}
+
+{% block body %}
+<!--<div class="easyui-accordion" style="width:100%;height:500px;">
+	<div title="{% trans %}Basic Settings{% endtrans %}" style="overflow:auto;padding:10px;">
+		<table id="BasicSet" class="easyui-propertygrid" style="width:500px;"></table>
+
+	</div>
+	
+	
+	
+	<div title="{% trans %}Start List Fields{% endtrans %}" style="padding:10px 0;">
+		<table id="StartListFields" title="{% trans %}Start List Fields{% endtrans %}" style="width:100%;height:250px"
+			toolbar="#toolbar" pagination="false" idField="id"
+			rownumbers="true" fitColumns="true" singleSelect="true">
+		<thead>
+			<tr>
+				<th field="Name" width="50" editor="{type:'validatebox',options:{required:true}}">{% trans%}Name{% endtrans%}</th>
+				<th field="ShowOrder" width="50" editor="{type:'validatebox',options:{required:true, validType:'number'}}">{% trans%}Show order{% endtrans%}</th>
+				<th field="StartListOrder" width="50" editor="{type:'validatebox',options:{required:true, validType:'number'}}">{% trans%}Start list order{% endtrans%}</th>
+			</tr>
+		</thead>
+		</table>
+		<div id="toolbar">
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#StartListFields').edatagrid('addRow')">{% trans %}New{% endtrans %}</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#StartListFields').edatagrid('destroyRow')">{% trans %}Destroy{% endtrans %}</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#StartListFields').edatagrid('saveRow')">{% trans %}Save{% endtrans %}</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#StartListFields').edatagrid('cancelRow')">{% trans %}Cancel{% endtrans %}</a>
+		</div>
+	</div>
+</div>
+
+<div id="toolbar">
+	<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="DownloadStartList();">{% trans %}Download start list{% endtrans %}</a>
+</div>
+-->    
+{% endblock %}
+
+{% block body_bottom %}
+	<!--script type="text/javascript" src="/static/js/config.js"></script-->
+{% endblock %}

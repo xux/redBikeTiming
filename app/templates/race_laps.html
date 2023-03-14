@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Laps{% endtrans%}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+	<table class="table table-hover _table-striped" id="tableData">
+		<thead>
+		<tr>
+			<th data-field="number">{%trans%}BIB{%endtrans%}</th>
+			<th data-field="time">{%trans%}Time{%endtrans%}</th>
+			<th data-field="peak">{%trans%}Peak{%endtrans%}</th>
+			<th data-field="lap">{%trans%}Lap{%endtrans%}</th>
+			<th data-field="lapTime">{%trans%}Lap Time{%endtrans%}</th>
+			<th data-field="totalTime">{%trans%}Total Time{%endtrans%}</th>
+			<th data-field="splits">{%trans%}Splits{%endtrans%}</th>
+		</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+$(function(){
+	enableAPI('{{RACE.getID()}}');
+	setStatusButtonIcon([
+		['ignore',  	{%trans%}'Ignore Split'{%endtrans%}, 'fa-times'],
+		['ignore-group',{%trans%}'Ignore Group'{%endtrans%}, 'fa-times-circle'],
+		['new-lap', 	{%trans%}'New Lap'{%endtrans%}, 'fa-sync'],
+		['start', 		{%trans%}'Start Split'{%endtrans%}, 'fa-flag'],
+		['interim', 	{%trans%}'Intermediate Split'{%endtrans%}, 'fa-spinner'],
+		['finish', 		{%trans%}'Finish Split'{%endtrans%}, 'fa-flag-checkered'],
+		['finished', 	{%trans%}'Finished Before Split'{%endtrans%}, 'fa-ban'],
+		['default', 	{%trans%}'Use Split'{%endtrans%}, 'fa-clock'],
+	]);
+	InitLaps('/laps', '{{url_for("race_laps", race_id=RACE.getID())}}' {% if NUMBER%}, {'number': '{{NUMBER}}'}{%endif%});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,575 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Config{% endtrans%}{% endblock %}
+
+{% block body %}
+<form method='post' enctype="multipart/form-data">
+<input class="d-none" type="submit" name="default" />
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+		<div class="row">
+			<h3>{%trans%}Global Settings{%endtrans%}</h3>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="btn btn-outline-primary btn-sm" href="{{url_for("race_select")}}">{%trans%}Race select{%endtrans%}</a>
+			</div>
+		</div>
+		{%if LocalConfig().has('Panels')%}
+		<div class="row">
+			<div class="accordion col-md-12 mt-1">
+				<div class="card">
+					<h5 class="card-header" id="PanelIPsHeader">
+						<a data-toggle="collapse" href="#PanelIPsCollapse" aria-expanded="false" aria-controls="PanelIPsCollapse" class="d-block">
+							{%trans%}Panel{%endtrans%}
+						</a>						
+					</h5>
+					<div id="PanelIPsCollapse" class="collapse" aria-labelledby="PanelIPsHeader" data-parent="#accordionExample">
+						<div class="card-body">				
+							<ul class="list-group">
+							{%for ip in RACE.GlobalSettings.getPanelIPs() %}
+								<li class="list-group-item">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="IP" name="panel-ip" value="{{ip|safe}}">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+							{%endfor%}
+								<li class="list-group-item new d-none">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="IP" name="panel-ip">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+								<li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{%endif%}
+		<div class="row">
+			<div class="col-md-12 mt-3">
+				{% for option in RACE.GlobalSettings.getGlobalConfigKeys() %}
+				<div class="form-group row">
+					<label for="reader-{{option}}" class="col-sm-2 col-form-label">{{option|KeyTextTrans}}</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="reader-{{option}}" name="reader-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{RACE.GlobalSettings.getReaderConfig(option)}}">
+						</div>
+				</div>
+				{%endfor%}				
+			</div> 
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+		<div class="row">
+			<h3>{%trans%}Race Settings{%endtrans%}</h3>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+					<div class="form-group row">
+						<label for="race-StartList" class="col-sm-2 col-form-label">{%trans%}Start list{%endtrans%}</label>
+						<div class="col-sm-8">
+							<input type="file" class="form-control" id="race-StartList" name="race-StartList" />
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-primary btn-block" type="submit" name="race-StartList-upload">{%trans%}Upload{%endtrans%}</button>
+						</div>
+					</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="accordion col-md-12">
+				<div class="card">
+					<h5 class="card-header" id="StartListHeader">
+						<a data-toggle="collapse" href="#StartListCollapse" aria-expanded="false" aria-controls="StartListCollapse" class="d-block">
+							{%trans%}Start columns{%endtrans%}
+						</a>						
+					</h5>
+					<div id="StartListCollapse" class="collapse" aria-labelledby="StartListHeader" data-parent="#accordionExample">
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div class="input-group row">
+										<div class="input-group-text form-control col-sm-3">{%trans%}Title{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-2">{%trans%}Type{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-2">{%trans%}Editor{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}For results{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-4">{%trans%}Full data{%endtrans%}</div>
+									</div>
+								</li>				
+								
+								{%for VALUE in RACE.getStartListColumns() %}
+									<li class="list-group-item">
+										<div class="input-group row">
+											<input type="text" class="form-control col-sm-3" placeholder="{%trans%}Title{%endtrans%}" name="StartListColumns-title" value="{{VALUE.get('title')|default("", True)|forceescape}}">
+											<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="StartListColumns-type">
+											{%for option in RACE.StartListColumns.getTypes()%}
+												<option {%if option.lower()==VALUE.get('type')|default("", True)|lower%}selected{%endif%}>{{option}}</option>
+											{%endfor%}
+											</select>
+											<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="StartListColumns-editor">
+											{%for option in RACE.StartListColumns.getEditors()%}
+												<option {%if option.lower()==VALUE.get('editor')|default("", True)|lower%}selected{%endif%}>{{option}}</option>
+											{%endfor%}
+											</select>
+											<div class="form-check col-sm-1">
+												<input type="checkbox" class="form-check-input" name="StartListColumns-forResults" value="{{VALUE.field}}" {%if VALUE.forResults%}checked{%endif%}>
+											</div>
+											<input type="text" class="form-control col-sm-3" placeholder="{%trans%}Full data{%endtrans%}" name="StartListColumns-data" value="{{VALUE|tojson|forceescape}}">
+											<div class="input-group-append col-sm-1">
+												<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+													<i class="fa fa-times"></i>
+												</button>
+											</div>
+										</div>
+									</li>				
+								{%endfor%}
+								<li class="list-group-item new d-none">
+									<div class="input-group row">
+										<input type="text" class="form-control col-sm-3" placeholder="{%trans%}Field{%endtrans%}" name="StartListColumns-title" value="">
+										<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="StartListColumns-type">
+										{%for option in RACE.StartListColumns.getTypes()%}
+											<option>{{option}}</option>
+										{%endfor%}
+										</select>
+										<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="StartListColumns-editor">
+										{%for option in RACE.StartListColumns.getEditors()%}
+											<option>{{option}}</option>
+										{%endfor%}
+										</select>
+										<div class="col-sm-1">
+										</div>
+										<div class="col-sm-3">
+										</div>
+										<div class="input-group-append col-sm-1">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+								<li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="accordion col-md-12">
+				<div class="card">
+					<h5 class="card-header" id="StartTimesHeader">
+						<a data-toggle="collapse" href="#StartTimesCollapse" aria-expanded="false" aria-controls="StartTimesCollapse" class="d-block">
+							{%trans%}Start times{%endtrans%}
+						</a>						
+					</h5>
+					<div id="StartTimesCollapse" class="collapse" aria-labelledby="StartTimesHeader" data-parent="#StartTimes">
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div class="input-group row">
+										<div class="input-group-text form-control col-sm-4">{%trans%}Time{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}Type{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}Time Shift{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}Default Shift{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}Default Shift Base{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-1">{%trans%}Lap{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-3">{%trans%}Who{%endtrans%}</div>
+									</div>
+								</li>				
+								{%for VALUE in RACE.RaceSettings.getStartTimes() %}
+									<li class="list-group-item">
+										<div class="input-group row">
+											<div class="input-group col-sm-4">
+												<input type="text" class="form-control" name="StartTimes-time" placeholder="{%trans%}Time{%endtrans%}" value="{{VALUE.get('time')|default("", True)|DateTimeStr or ""}}">
+												<div class="input-group-append">
+													<button class="btn btn-outline-secondary test" type="button" onclick="setValueNow(this)"><i class="fa fa-clock"></i> {%trans%}Now{%endtrans%}</button>
+												</div>
+											</div>
+											<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-type">
+											{%for option in ['Mass', 'Individual']%}
+												<option {%if option.lower()==VALUE.get('type')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+											</select>
+											<div class="form-check col-sm-1">
+												<input type="checkbox" class="form-check-input" name="StartTimes-shift" value="{{loop.index0}}" {%if VALUE.shift%}checked{%endif%}>
+											</div>
+											<div class="col-sm-1">
+												<input type="text" placeholder="{%trans%}HH:MM:SS{%endtrans%}" pattern="\d{1,2}:\d{1,2}:\d{1,2}" class="form-control" name="StartTimes-def-shift" value="{{VALUE.get('def-shift')|default("", True)|TimeStr or ""}}">
+											</div>
+											<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-def-shift-base">
+											{%for option in ['Bib', 'Bib0', 'Order']%}
+												<option {%if option.lower()==VALUE.get('def-shift-base')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+											</select>
+											<div class="col-sm-1">
+												<input type="text" placeholder="{%trans%}Lap{%endtrans%}" pattern="[0-9]+" class="form-control" name="StartTimes-lap" value="{{VALUE.get('lap')|default("", True) or ""}}">
+											</div>
+											<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-who">
+												{%for option in ['', 'Numbers', 'Categories']%}
+													<option {%if option.lower()==VALUE.get('who')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+												{%endfor%}
+											</select>
+											<input type="text" class="form-control col-sm-1" placeholder="{%trans%}Who value{%endtrans%}" name="StartTimes-who-value" value="{{VALUE.get('who-value')|default("", True)|forceescape}}">
+											<div class="input-group-append col-sm-1">
+												<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+													<i class="fa fa-times"></i>
+												</button>
+											</div>
+										</div>
+									</li>				
+								{%endfor%}
+								<li class="list-group-item new d-none">
+									<div class="input-group row">
+										<div class="input-group col-sm-4">
+											<input type="text" class="form-control" name="StartTimes-time" placeholder="{%trans%}Time{%endtrans%}">
+											<div class="input-group-append">
+												<button class="btn btn-outline-secondary test" type="button" onclick="setValueNow(this)"><i class="fa fa-clock"></i> {%trans%}Now{%endtrans%}</button>
+											</div>
+										</div>
+										<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-type">
+										{%for option in ['Mass', 'Individual']%}
+											<option value="{{option}}">{{option|KeyTextTrans}}</option>
+										{%endfor%}
+										</select>
+										<div class="form-check col-sm-1">
+											<input type="checkbox" class="form-check-input" name="StartTimes-shift">
+										</div>
+										<div class="col-sm-1">
+											<input type="text" placeholder="{%trans%}HH:MM:SS{%endtrans%}" pattern="\d{1,2}:\d{1,2}:\d{1,2}" class="form-control" name="StartTimes-def-shift">
+										</div>
+										<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-def-shift-base">
+										{%for option in ['Bib', 'Order']%}
+											<option value="{{option}}">{{option|KeyTextTrans}}</option>
+										{%endfor%}
+										</select>
+										<div class="col-sm-1">
+											<input type="text" placeholder="{%trans%}Lap{%endtrans%}" pattern="[0-9]+" class="form-control" name="StartTimes-lap">
+										</div>
+										<select class="form-control col-sm-1" placeholder="{%trans%}Type{%endtrans%}" name="StartTimes-who">
+											{%for option in ['', 'Numbers', 'Categories']%}
+												<option value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+										</select>
+										<input type="text" class="form-control col-sm-1" placeholder="{%trans%}Who value{%endtrans%}" name="StartTimes-who-value">
+										<div class="input-group-append col-sm-1">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+								<li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+
+		<div class="row">
+			<div class="accordion col-md-12">
+				<div class="card">
+					<h5 class="card-header" id="FinishLimitsHeader">
+						<a data-toggle="collapse" href="#FinishLimitsCollapse" aria-expanded="false" aria-controls="FinishLimitsCollapse" class="d-block">
+							{%trans%}Finish Limits{%endtrans%}
+						</a>						
+					</h5>
+					<div id="FinishLimitsCollapse" class="collapse" aria-labelledby="FinishLimitsHeader" data-parent="#FinishLimits">
+						<div class="card-body">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">
+									<div class="input-group row">
+										<div class="input-group-text form-control col-sm-3">{%trans%}Type{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-2">{%trans%}Limit{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-2">{%trans%}Dimension{%endtrans%}</div>
+										<div class="input-group-text form-control col-sm-5">{%trans%}Who{%endtrans%}</div>
+									</div>
+								</li>				
+								{%for VALUE in RACE.RaceSettings.getFinishLimits() %}
+									<li class="list-group-item">
+										<div class="input-group row">
+											<select class="form-control col-sm-3" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-type">
+											{%for option in ['Individual', 'Leader']%}
+												<option {%if option.lower()==VALUE.get('type')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+											</select>
+											<input type="text" class="form-control col-sm-2" placeholder="{%trans%}Limit{%endtrans%}" name="FinishLimits-limit" value="{{VALUE.limit}}">
+											<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-dimension">
+											{%for option in ['Laps', 'Minutes']%}
+												<option {%if option.lower()==VALUE.get('dimension')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+											</select>
+											<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-who">
+												{%for option in ['', 'Numbers', 'Categories']%}
+													<option {%if option.lower()==VALUE.get('who')|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+												{%endfor%}
+											</select>
+											<input type="text" class="form-control col-sm-2" placeholder="{%trans%}Who value{%endtrans%}" name="FinishLimits-who-value" value="{{VALUE.get('who-value')|default("", True)|forceescape}}">
+											<div class="input-group-append col-sm-1">
+												<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+													<i class="fa fa-times"></i>
+												</button>
+											</div>
+										</div>
+									</li>				
+								{%endfor%}
+								<li class="list-group-item new d-none">
+									<div class="input-group row">
+										<select class="form-control col-sm-3" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-type">
+										{%for option in ['Individual', 'Leader']%}
+											<option value="{{option}}">{{option|KeyTextTrans}}</option>
+										{%endfor%}
+										</select>
+										<input type="text" class="form-control col-sm-2" placeholder="{%trans%}Limit{%endtrans%}" name="FinishLimits-limit" value="">
+										<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-dimension">
+										{%for option in ['Laps', 'Minutes']%}
+											<option value="{{option}}">{{option|KeyTextTrans}}</option>
+										{%endfor%}
+										</select>
+										<select class="form-control col-sm-2" placeholder="{%trans%}Type{%endtrans%}" name="FinishLimits-who">
+											{%for option in ['', 'Numbers', 'Categories']%}
+												<option value="{{option}}">{{option|KeyTextTrans}}</option>
+											{%endfor%}
+										</select>
+										<input type="text" class="form-control col-sm-3" placeholder="{%trans%}Who value{%endtrans%}" name="FinishLimits-who-value">
+										<div class="input-group-append col-sm-1">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+								<li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="accordion col-md-12">
+				<div class="card">
+					<h5 class="card-header" id="CategoriesHeader">
+						<a data-toggle="collapse" href="#CategoriesCollapse" aria-expanded="false" aria-controls="CategoriesCollapse" class="d-block">
+							{%trans%}Categories{%endtrans%}
+						</a>						
+					</h5>
+					<div id="CategoriesCollapse" class="collapse" aria-labelledby="CategoriesHeader" data-parent="#accordionExample">
+						<div class="card-body">				
+							<ul class="list-group">
+							{%for category in RACE.RaceSettings.getCategories() %}
+								<li class="list-group-item">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="{%trans%}Category{%endtrans%}" name="race-category" value="{{category|safe}}">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+							{%endfor%}
+								<li class="list-group-item new d-none">
+									<div class="input-group">
+										<input type="text" class="form-control" placeholder="{%trans%}Category{%endtrans%}" name="race-category">
+										<div class="input-group-append">
+											<button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+												<i class="fa fa-times"></i>
+											</button>
+										</div>
+									</div>
+								</li>				
+								<li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col-md-12 mt-3">
+				{% for option in RACE.RaceSettings.getRaceSettingsKeys() %}
+				<div class="form-group row">
+					<label for="race-{{option}}" class="col-sm-2 col-form-label">{{option|KeyTextTrans}}</label>
+					<div class="input-group col-sm-1">
+						{% set option_help = option|KeyTextHelp %}
+						{%if option_help%}
+							<button type="button" class="btn" data-container="body" data-html="true" data-toggle="popover" data-trigger="focus" data-placement="right" data-content="{{option_help}}"><i class="fa fa-question-circle"></i></button>
+						{%endif%}
+					</div>
+					{% set option_type = RACE.RaceSettings.getRaceSettingsType(option) %}
+					{% if option_type == 'datetime'%}
+						<div class="input-group col-sm-9">
+							<input type="text" class="form-control" id="race-{{option}}" name="race-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{RACE.RaceSettings.getRaceSettings(option, text=True) or ""}}">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary test" type="button" onclick="setValueNow(this)"><i class="fa fa-clock"></i> {%trans%}Now{%endtrans%}</button>
+							</div>
+						</div>
+					{% elif option_type == 'time'%}
+					<div class="col-sm-9">
+						<input type="text" placeholder="{%trans%}HH:MM:SS{%endtrans%}" pattern="\d{1,2}:\d{1,2}:\d{1,2}" class="form-control" id="race-{{option}}" name="race-{{option}}" value="{{RACE.RaceSettings.getRaceSettings(option, text=True) or ""}}">
+					</div>
+					{% elif option_type.__class__.__name__ == 'list' %}
+						<select class="form-control col-sm-9" placeholder="{{option|KeyTextTrans}}" name="race-{{option}}">
+						{%for value in option_type %}
+							<option {%if value == RACE.RaceSettings.getRaceSettings(option)%}selected{%endif%} value="{{value}}">{{value|KeyTextTrans}}</option>
+						{%endfor%}
+						</select>					
+					{% elif option_type == 'bool' or (option_type.__class__.__name__ == 'tuple') %}
+						<div class="col-sm-9">
+						{% if option_type == 'bool' or (option_type|length == 2 and option_type[0] == 'disable') %}
+							{% for value, text in [(0, 'No'), (1, 'Yes')] %}
+							<div class="form-check form-check-inline">
+  								<input class="form-check-input" type="radio" id="race-{{option}}_{{value}}" name="race-{{option}}" value="{{value}}" {%if RACE.RaceSettings.getRaceSettings(option) == value %}checked {%endif%}>
+  								<label class="form-check-label" for="race-{{option}}_{{value}}">{{text|KeyTextTrans}}</label>
+							</div>
+							{%endfor%}
+						{%else%}
+							{%for op in option_type%}
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="radio" id="race-{{option}}-{{op}}" name="race-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{op}}" {% if RACE.RaceSettings.getRaceSettings(option) == op%}checked{%endif%}>
+									<label class="form-check-label" for="race-{{option}}-{{op}}">{{op}}</label>
+								</div>
+							{%endfor%}
+						{%endif%}
+						</div>
+					{% elif  option_type == 'pass' %}
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="race-{{option}}" name="race-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{RACE.RaceSettings.getRaceSettings(option) or ""}}">
+						</div>
+					{% else %}
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="race-{{option}}" name="race-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{RACE.RaceSettings.getRaceSettings(option) or ""}}">
+						</div>
+					{% endif %}
+				</div>
+				{%endfor%}				
+			</div>
+		</div>
+
+		<div class="row">
+			<h3>{%trans%}TV{%endtrans%}</h3>
+			<div class="col-md-12 mt-3">
+				{% for option in RACE.RaceSettings.getRaceTVSettingsKeys() %}
+				<div class="form-group row">
+					<label for="race-tv-{{option}}" class="col-sm-2 col-form-label">{{option|KeyTextTrans}}</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="race-tv-{{option}}" name="race-tv-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{RACE.RaceSettings.getRaceTVSettings(option) or ""}}">
+						</div>
+				</div>
+				{%endfor%}				
+			</div>
+		</div>
+
+		<div class="row">
+			<h3>{%trans%}Synchronization{%endtrans%}</h3>
+			<div class="col-md-12 mt-3">
+
+				{%for what in RACE.RaceSettings.getRaceSyncKeys(False)%}
+				<div class="form-group row">
+					<label for="race-sync-{{what.lower()}}" class="col-sm-2 col-form-label">{{what|KeyTextTrans}}</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="race-sync-{{what.lower()}}" name="race-sync-{{what.lower()}}" placeholder="{{what|KeyTextTrans}}" value="{{RACE.RaceSettings.getRaceSyncSettings(what.lower()) or ""}}">
+						</div>
+				</div>
+				{%endfor%}
+	
+				{%for what in RACE.RaceSettings.getRaceSyncKeys(True)%}
+				<div class="form-group row">
+					<label for="race-sync-{{what.lower()}}" class="col-sm-2 col-form-label">{{what|KeyTextTrans}}</label>
+					<select class="form-control col-sm-6" placeholder="{{what|KeyTextTrans}}" name="race-sync-{{what.lower()}}">
+					{%for option in ['', 'Send', 'Receive']%}
+						<option {%if option.lower()==RACE.RaceSettings.getRaceSyncSettings(what.lower())|default("", True)|lower%}selected{%endif%} value="{{option}}">{{option|KeyTextTrans}}</option>
+					{%endfor%}
+					</select>
+				</div>
+				{%endfor%}
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+<div class="row">
+	<button class="col-md-10 offset-md-1 btn btn-primary btn-block" type="submit" name="race-ConfigSave">{%trans%}Save{%endtrans%}</button>
+</div>
+</form>
+
+<div class="row">
+	<form method="post" enctype="multipart/form-data" class="col-md-4 offset-md-4">
+		<div class="row mt-1">
+			<h3>{%trans%}Service{%endtrans%}</h3>
+		</div>
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{url_for("race_refresh", race_id=RACE.getID())}}">{%trans%}Refresh race{%endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="submit" name="race-RecalcResults">{%trans%}Recalc Results{%endtrans%}</button>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="submit" name="race-StartListDownload">{%trans%}Download Start List{%endtrans%}</button>
+		</div>
+		{%if RACE%}			
+		{%if RACE.RaceSettings.getResultsUploadLink()%}			
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{RACE.RaceSettings.getResultsUploadLink()}}"><i class="fa fa-web"></i>{%trans%}Online results{%endtrans%}</a>
+		</div>
+		{%endif%}
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{url_for("race_results", race_id=RACE.getID(), category="downloadXLSX")}}">{%trans%}Download results XLSX file{%endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{url_for("race_results", race_id=RACE.getID(), category="downloadPDF")}}">{%trans%}Download results PDF file{%endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{url_for("race_clear", race_id=RACE.getID())}}">{%trans%}Clear Race{%endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+			<a class="btn btn-outline-primary btn-block" href="{{url_for("race_download", race_id=RACE.getID())}}">{%trans%}Download Race Folder{%endtrans%}</a>
+		</div>
+		{%endif%}
+		{%if LocalConfig().has('service')%}
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="button" onclick="restartService('http')"><i class="fa fa-microchip"></i> {%trans%}Restart HTTP{%endtrans%}</button>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="button" onclick="restartService('llrp')"><i class="fa fa-podcast"></i> {%trans%}Restart LLRP{%endtrans%}</button>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="button" onclick="restartService('vlc_music')"><i class="fa fa-podcast"></i> {%trans%}Restart MUSIC{%endtrans%}</button>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="button" onclick="syncPanel()"><i class="fa fa-solar-panel"></i> {%trans%}Sync panels{%endtrans%}</button>
+		</div>
+		<div class="row mt-1">
+			<button class="btn btn-outline-primary btn-block" type="button" onclick="ConfigAction('time')"><i class="fa fa-clock"></i> {%trans%}Sync Time{%endtrans%}</button>
+		</div>
+		{%endif%}
+	</form>
+</div>
+
+
+<div class="row mt-1">
+	<div class="col-md-4 offset-md-4">
+		<span>{%trans%}Server time: {%endtrans%}{{NOW.strftime("%Y-%m-%d %H:%M:%S")}}</span>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

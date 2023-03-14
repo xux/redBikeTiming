@@ -1,0 +1,38 @@
+<div class="row">
+	<div class="col-md-10 offset-md-1">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				{%if ALL%}
+					{%if DB != ""%}
+						{%if TYPE%}
+							<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID(), t=TYPE)}}">{%trans%}All{%endtrans%}</a></li>
+						{%else%}
+							<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID())}}">{%trans%}All{%endtrans%}</a></li>
+						{%endif%}
+					{%else%}
+						<li class="breadcrumb-item active">{{DEF}}</li>
+					{%endif%}
+				{%endif%}
+				{%for db in DBs%}
+					{%if DB != db %}
+						{%if TYPE%}
+							<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID(), t=TYPE, db=db)}}">{{db}}</a></li>
+						{%else%}
+							<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID(), db=db)}}">{{db}}</a></li>
+						{%endif%}
+					{%else%}
+						<li class="breadcrumb-item active">{{db}}</li>
+					{%endif%}
+				{%endfor%}
+				{%if NEW%}
+					{%if TYPE%}
+						<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID(), t=TYPE, db=NEW)}}">{%trans%}Add{%endtrans%}</a></li>
+					{%else%}
+						<li class="breadcrumb-item"><a href="{{url_for(URL, race_id=RACE.getID(), db=NEW)}}">{%trans%}Add{%endtrans%}</a></li>
+					{%endif%}
+				{%endif%}
+
+			</ol>
+		</nav>	
+	</div>
+</div>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online results - redBikeTiming</title>
+<style>
+{%if not NO_SCRIPT %}
+body {
+	margin: 0;
+	overflow: hidden;
+{%if PADDING %}    
+	background-color: #000000;
+}
+div.body {
+	background-color: #EEEEEE;
+	overflow: hidden;
+	position: absolute;
+    left: {{PADDING[0]}}px;
+    top: {{PADDING[1]}}px;
+    bottom: {{PADDING[3]}}px;
+    right: {{PADDING[2]}}px;
+{%endif%}
+}
+{%if QR %}    
+.qr {
+	position: fixed; 
+{% if QR[0] > 0 %}
+	left: {{QR[0]}}px;
+{%else%}
+	right: {{0-QR[0]}}px;
+{%endif%} 
+{% if QR[1] > 0 %}
+	top: {{QR[1]}}px;
+{%else%}
+	bottom: {{0-QR[1]}}px;
+{%endif%} 
+}
+{%endif%}
+a:link, a:visited, a:hover, a:active {
+	color: black;
+	text-decoration: none;
+}
+{%if SCALE%}
+table.base {
+   transform: scale({{SCALE}});
+   transform-origin: 0 0;
+}
+{%endif%}
+{%endif%}
+{% if not ROWS_COUNT%}
+table {
+   min-width: 100%;
+}
+{%endif%}
+table.base tr{
+	vertical-align: top;
+}
+{%if NO_SCRIPT %}
+table.page tbody tr:hover {
+	background-color: #b5b5b5;
+}
+{%endif%}
+table.page {
+	color: black;
+	overflow: hidden;
+}
+table.page thead{
+	background-color: #8dadcc;
+	text-align: left;
+}
+table.page tr td{
+	border-top: 1px solid #ddd;
+	padding: 5px;
+	white-space:nowrap;
+}
+.red {
+	color: red;
+}
+.hidden {
+	display: none;
+}
+#error {
+	text-align : center;
+	color: #ddd;
+	min-width : 100%;
+	min-height: 100%;
+}
+
+</style>
+</head>
+<body>
+<div class="body">
+{%if TITLE%}<h1>{{TITLE}}</h1>{%endif%}
+{%if JQUERY%}
+<div class="hidden" id="error">
+	<h1 class="message">{%trans%}Error{%endtrans%}</h1>
+	<br>
+	<p> {%trans%}Wait{%endtrans%} <span class="counter"></span>...</p>
+</div>
+{%endif%}
+{% set page = namespace(value=1) %}
+{% set global_row = namespace(value=1) %}
+{%if not NO_SCRIPT %}
+<table class="base">
+	<tr>
+		<td>
+{%endif%}
+			<table class="page page{{page.value}}">
+				{%for category, ROWS in DATA %}
+					{%for row in ROWS[1:]%}
+
+						{%if ROWS_COUNT and global_row.value > ROWS_COUNT %}
+							{% set page.value = page.value + 1 %}
+			</table>
+		</td>
+		<td>
+			<table class="page page{{page.value}}">
+							{% set global_row.value = 1 %}
+						{%endif%}
+
+						{%if global_row.value==1 or (ROWS_COUNT and global_row.value > ROWS_COUNT) or loop.index == 1 %}
+				<thead>
+					<tr><th colspan="100" class="red">{%if category==''%}{%trans%}General{%endtrans%}{%else%}{{category|KeyTextTrans}}{%endif%}</th></tr>
+							{% set global_row.value = global_row.value + 1 %}
+					<tr>{%for column in ROWS[0]%}<th>{{column}}</th>{%endfor%}</tr>
+							{% set global_row.value = global_row.value + 1 %}
+				</thead>
+						{%endif%}
+						<tr>{%for column in row%}<td>{{column}}</td>{%endfor%}</tr>
+						{% set global_row.value = global_row.value + 1 %}
+					{%endfor%}
+				{%endfor%}
+			</table>
+{%if not NO_SCRIPT %}
+
+		</td>
+	</tr>
+</table>
+{%endif%}
+
+{%if QR_LINK and QR_LINK != ''%}
+<div class="qr">
+	<img src="{{ qrcode(QR_LINK) }}">
+	<h5><a href="{{QR_LINK}}">{{QR_LINK}}</a></h5>
+</div>
+{%endif%}
+{%if not NO_SCRIPT %}
+{%if JQUERY%} 
+<script type="text/javascript" src="/static/libs/jquery/jquery-3.5.1.min.js"></script>
+{%endif%}
+<script>
+	var page = 1;
+	{%if SCROLL_TIMEOUT and SCROLL_TIMEOUT > 0%}
+	var interval = false;
+	function ErrorMessage(counter) {
+		$("#error .counter").text(counter);
+	}
+	function reloadPage() {
+		if (interval) clearTimeout(interval);
+		{%if JQUERY%} 
+			$("table.base").load(window.location.href +  " table.base > *", function(text, status, j) {
+				page = 1;
+				if (status == "success") {
+					$("#error").hide();
+					ScrollToPage(0);
+				} else {
+					$("table.base").empty();
+					var counter = 10;
+					ErrorMessage(counter);
+					$("#error").show();
+					var cd = setInterval(function(){
+						counter--;
+						ErrorMessage(counter);
+						if (counter <= 0) {
+							clearInterval(cd);
+							reloadPage();
+						}
+					}, 1000);
+				}
+			});			
+		{%else%}
+			window.location.href = window.location.href;
+		{%endif%}
+	}
+	function ScrollToPage(move_page){
+		if (interval) clearTimeout(interval);
+		page += move_page;
+		var el = document.getElementsByClassName('page' + page);
+		if ((el.length == 0) || ((move_page != 0) && (document.documentElement.scrollLeft == document.documentElement.scrollLeftMax))) {
+			reloadPage();
+		} 
+		else
+		{
+			el[0].scrollIntoView({block: "start", inline:'start', behavior: "smooth"});
+			interval = setTimeout(function() {
+				ScrollToPage(1);
+			}, {{SCROLL_TIMEOUT}} * 1000);
+		}
+	}
+	document.onkeydown = function (e) {
+		e = e || window.event;
+		if (e.keyCode == '38') {
+			// up arrow
+		}
+		else if (e.keyCode == '40') {
+			// down arrow
+		}
+		else if (e.keyCode == '37') {
+			ScrollToPage(-1);
+		}
+		else if (e.keyCode == '39') {
+			ScrollToPage(1);
+		}
+	}	
+	ScrollToPage(0);
+	{%endif%}
+</script>
+{%endif%}
+</div>
+</body>
+</html>

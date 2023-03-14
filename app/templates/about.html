@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}About{% endtrans%}{% endblock %}
+
+{% block header %}{%endblock%}
+{% block body %}
+<div class="row">
+	<div class="col-md-4 offset-md-4">
+		<div class="row mt-1">
+            <a href="/"><img style="width:100%" src="{{url_for('static', filename='img/redbiketiming.svg')}}"></a>
+		</div>
+		<div class="row mt-1">
+            <a class="btn btn-outline-primary btn-block" href="https://remote.rslt.live">{% trans %}Online server{% endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+            <a class="btn btn-outline-primary btn-block" href="https://github.com/xux/redBikeTiming">{% trans %}redBikeTiming on GitHub{% endtrans%}</a>
+		</div>
+		<div class="row mt-1">
+            <a class="btn btn-outline-primary btn-block" href="{{url_for('mobile_app_download', _external=True)}}">{%trans%}Download android application{%endtrans%}</a>
+		</div>
+{#		<div class="row mt-1">
+            <a class="btn btn-outline-primary btn-block" href="{{url_for('win_app_download', _external=True)}}">{%trans%}Download Windows 64 application{%endtrans%}</a>
+		</div>#}
+    </div>
+</div>
+
+
+{%endblock%}
+{% block footer %}{%endblock%}

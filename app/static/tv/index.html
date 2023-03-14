@@ -1,0 +1,176 @@
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	
+<meta charset="utf-8">
+<meta http-equiv="content-language" content="en" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+<title>Онлайн результаты - redBikeCup</title>
+<meta property="og:title" content="Онлайн результаты - redBikeCup"/>
+
+
+
+<meta property="og:image" content="" />
+<link rel="image_src" href="" />
+
+<meta property="og:url" content="" />
+<link rel="canonical" href="" />
+<meta property="og:type" content="website" />
+	
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="static/img/favicon.ico">
+
+	<script>var CMDs = [];</script>
+
+
+	<link href="static/libs/jquery/jquery-ui.css" rel="stylesheet">
+	<link href="static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="static/css/theme.min.css" rel="stylesheet">
+	<link href="static/libs/bootstrap/css/bootstrap-social.css" rel="stylesheet">
+	<link href="static/libs/bootstrap/css/bootstrap-select.min.css"  rel="stylesheet">
+	<link href="static/libs/bootstrap/css/bootstrap-tokenfield.min.css"  rel="stylesheet">
+	<link href="static/libs/bootstrap/css/tokenfield-typeahead.min.css"  rel="stylesheet">
+
+	<link href="static/libs/font-awesome/css/font-awesome.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+		<script src=""></script>
+		<script src=""></script>
+	<![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="static/css/base.css" /> 
+
+
+<style>
+body {
+	padding: 0;
+	padding-bottom: 50px;
+
+}
+body.tv {
+	overflow: hidden;
+}
+
+#tv_logo {
+	position : fixed;
+	bottom: 0;
+	right: 0;
+	width: 150px;
+}
+.anchor::before {
+	height : 0;
+	margin : 0;
+}
+#floatTimer {
+	position : fixed;
+	top: 15px;
+	right: 15px;
+	line-height: 64px;
+	font-size: 64px;
+}
+body.tv table {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+}
+
+body.tv table tr td:nth-child(2),
+body.tv table tr th:nth-child(2),
+body.tv table tr td:nth-child(5),
+body.tv table tr th:nth-child(5),
+body.tv table tr td:nth-child(6),
+body.tv table tr th:nth-child(6),
+body.tv table tr td:nth-child(7),
+body.tv table tr th:nth-child(7),
+body.tv table tr td:nth-child(8),
+body.tv table tr th:nth-child(8),
+body.tv table tr td:nth-child(10),
+body.tv table tr th:nth-child(10) {
+	display: none;
+}
+body.tv table tr.header {
+	background-color: #8dadcc;
+}
+body.tv #results {
+	position: relative;
+	width: 100%;
+}
+body #resultsLoader {
+	position: absolute;
+	visibility: hidden;
+	display: block;
+}
+#OnlineBoard {
+	display: none;
+}
+body.tv #OnlineBoard {
+	display: block;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	max-height: 100%;
+	margin: 0;
+	z-index: 10;
+}
+body.tv #OnlineBoard #status {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	margin: 10px;
+	top: auto;
+}
+
+</style>
+
+ 
+</head>	
+<body >
+
+	
+	
+<h1><div id="resultsTitle"></div></h1>         	
+<h3><div id="resultsHeader"></div></h3>
+<div id="resultsLoader" data-csv="results.csv"></div>
+<div id="results"><center class="load" style="position: fixed; bottom: 0; left: 50%; margin-left: -110px;"><img src="static/img/loading.gif"/></center></div>
+
+	<img id="tv_logo" src="static/img/logo/rbc/default.png"/>
+	<div id="OnlineBoard" class="list-group"></div>
+
+
+
+	
+
+	<script src="static/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+	<script src="static/libs/jquery/jquery-ui.js" type="text/javascript"></script>
+	<script src="static/libs/jquery/jquery.query-object.js" type="text/javascript"></script>
+	<script src="static/libs/jquery/jquery.lazyload.js" type="text/javascript"></script>
+	<script src="static/libs/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="static/libs/bootstrap/js/bootstrap-select.min.js"></script>
+	<script src="static/libs/bootstrap/js/bootstrap-tokenfield.min.js"></script>
+	<script src="static/libs/moment.min.js"></script>
+	<script>moment.locale('ru');</script>
+	<script src="static/libs/combodate.js"></script>
+
+	<script src="static/js/utils.js" type="text/javascript"></script>
+	<script src="static/js/main.js" type="text/javascript"></script>
+
+	
+	<script src="static/libs/jquery/jquery.floatThead.min.js"></script>
+<script src="static/js/table.js"></script>
+
+
+ 
+</body>
+</html>

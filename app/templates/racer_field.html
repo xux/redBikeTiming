@@ -1,0 +1,40 @@
+{%if FIELD%}
+{%if EDIT%}
+<div class="form-group row">
+	<label for="{{FIELD.1.field}}" class="col-sm-2 col-form-label">{{FIELD.1.title}}</label>
+	<div class="col-sm-10">
+	{%if FIELD.1.editor=="number"%}
+		<input class="form-control" type="number" name="{{FIELD.1.field}}" value="{{FIELD.0|safe}}">
+	{%elif FIELD.1.editor=="date"%}
+		<input class="form-control" type="text" data-provide="datepicker" data-date-format="dd.mm.yyyy" name="{{FIELD.1.field}}" value="{{FIELD.0|safe}}">
+	{%elif FIELD.1.editor=="select"%}
+		{%if FIELD.1.customValue%}
+			<div class="input-group">
+				<input type="text" class="form-control" aria-label="Text input with dropdown button" name="{{FIELD.1.field}}" value="{{FIELD.0|safe}}">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{FIELD.1.title}}</button>
+					<div class="dropdown-menu">
+					{%for VALUE in FIELD.1.editorParams%}
+						<a class="dropdown-item" href="#" {%if VALUE.auto%}auto="{{VALUE.auto|safe}}"{%endif%} onclick="return DropDownSelect(this);">{{VALUE.name}}</a>
+					{%endfor%}
+					</div>
+				</div>
+			</div>
+		{%else%}
+			<select class="form-control" type="select" name="{{FIELD.1.field}}" value="{{FIELD.0|safe}}">
+			{%for VALUE in FIELD.1.editorParams%}
+				<option {%if VALUE.auto%}auto="{{VALUE.auto|safe}}"{%endif%} {%if FIELD.0==VALUE.name%}selected{%endif%}>{{VALUE.name}}</option>
+			{%endfor%}
+			</select>
+		{%endif%}
+	{%elif FIELD.1.editor=="bool"%}
+		<input class="form-control form-check-input" type="checkbox" name="{{FIELD.1.field}}" {%if FIELD.0 %}checked="true"{%endif%}/>
+	{%else%}
+		<input class="form-control" type="text" name="{{FIELD.1.field}}" value="{{FIELD.0|safe}}">
+	{%endif%}
+	</div>
+</div>
+{%else%}
+	<span>{{FIELD.0|safe}}</span>
+{%endif%}
+{%endif%}

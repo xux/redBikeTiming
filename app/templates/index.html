@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Main{% endtrans%}{% endblock %}
+
+{% block body %}
+	<table id="main_grid" class="grid" columns="/api/races/test/startlistcolumns" content="/api/races/test/racers"></table>
+	<div id="main_grid_pager"></div>
+{% endblock %}
+
+{% block body_bottom %}
+{% endblock %}

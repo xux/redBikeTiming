@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Results TV{% endtrans%}{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="list-group col-md-6 offset-md-3">
+		<a class="list-group-item list-group-item-action col-md-12 mt-3 btn btn-primary" href="{{url_for('tv', action='clear')}}">Clear</a>
+		<div class="list-group-item list-group-item-action col-md-12 mt-3">
+			<form method="post" enctype="multipart/form-data" action="{{url_for('tv', action='upload')}}">
+					<div class="form-group row">
+						<label for="file" class="col-sm-2 col-form-label">File</label>
+						<div class="col-sm-4">
+							<input type="file" class="form-control" id="file" name="file" />
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" id="file_name" name="file_name" placeholder="Name" />
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-primary btn-block" type="submit" >Upload</button>
+						</div>
+					</div>
+				</form>
+		</div>
+		<div class="list-group-item list-group-item-action col-md-12 mt-3">
+			<form method="get" action="{{url_for('tv', action='results')}}">
+				<div class="form-group row">
+					<label for="scale" class="col-sm-2 col-form-label">Scale</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="scale" name="scale" value="{{RACE.RaceSettings.getRaceTVSettings('Scale', 1)}}"/>
+					</div>
+					<label for="rows-count" class="col-sm-2 col-form-label">Rows count</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="rows-count" name="rows-count" value="{{RACE.RaceSettings.getRaceTVSettings('Rows_Count', 25)}}"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="scroll-timeout" class="col-sm-2 col-form-label">Scroll Timeout</label>
+					<div class="col-sm-4">
+						<input type="number" class="form-control" id="scroll-timeout" name="scroll-timeout"  value="{{RACE.RaceSettings.getRaceTVSettings('Scroll_Timeout', 30)}}"/>
+					</div>
+					<label for="padding" class="col-sm-2 col-form-label">Padding</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="padding" name="padding" value="{{RACE.RaceSettings.getRaceTVSettings('Padding', "[5,5,5,5]")}}"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="qr" class="col-sm-2 col-form-label">QR position</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="qr" name="qr"  value="{{RACE.RaceSettings.getRaceTVSettings('QR_Shift', "[-10, -10]")}}"/>
+					</div>
+					<label for="qr-link" class="col-sm-2 col-form-label">QR link</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="qr-link" name="qr-link" value="{{RACE.RaceSettings.getResultsQRLink()}}"/>
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-sm-4 offset-md-8">
+						<button class="btn btn-primary btn-block" type="submit" >Results</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

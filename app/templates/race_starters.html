@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Config{% endtrans%}{% endblock %}
+
+{% block body %}
+
+<form method='post'>
+<div class="row">
+	<div class="col-md-12">
+		<h4>{%trans%}Start{%endtrans%}</h4>
+    </div>
+	<select class="form-control col-md-4" placeholder="Type" name="Run">
+    {%for option in RACE.RaceSettings.getRunsTitles()%}
+        <option>{{option}}</option>
+    {%endfor%}
+    </select>
+    <input type="text" class="form-control col-md-4" placeholder="Time" name="Time" value="">
+<div class="input-group col-md-4">
+  <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
+  <div class="input-group-append">
+    <!--<button type="button" class="btn btn-outline-secondary">Action</button>-->
+    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div role="separator" class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </div>
+</div>
+    <button class="btn btn-primary btn-block col-md-2" type="button" onclick="setValueNow('race-{{option}}')"><i class="fa fa-clock"></i> {%trans%}Now{%endtrans%}</button>
+    <button class="btn btn-primary btn-block col-md-2" type="button" onclick="setValueNow('race-{{option}}')"><i class="fa fa-save"></i> {%trans%}Save{%endtrans%}</button>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

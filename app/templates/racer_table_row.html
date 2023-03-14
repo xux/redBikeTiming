@@ -1,0 +1,9 @@
+<td>
+	<button type="button" class="btn btn-default edit {% if RACER.isLocked()%}invisible{%endif%}" onclick="editRacer({{RACER.getID()}})"><i class="fas fa-pencil-alt"></i></button>
+</td>
+{%for FIELD in RACER.getStartListData()%}
+<td>
+{{FIELD}}
+	{%include "racer_field.html"%}
+</td>
+{%endfor%}

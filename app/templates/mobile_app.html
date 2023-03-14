@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{% trans %}Mobile app{% endtrans%} - redBikeTiming{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-md-4 offset-md-4">
+		<div id="accordion">
+			<div class="card">
+				<div class="card-header" id="headingOne">
+					<h5 class="mb-0">
+				  		<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							{%trans%}Scan from Mobile App{%endtrans%}
+				  		</button>
+					</h5>
+			  	</div>
+		  
+			  	<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+					<div class="card-body">
+						<img style="width:100%" src="{{ qrcode(QR_DATA) }}">
+						<p onclick="copy2clipboard(this);">{{QR_DATA}}</p>
+						<p><a class="btn btn-outline-primary btn-block" href="app://redbiketiming/settings?data={{B64_DATA}}">{%trans%}Send data to mobile app{%endtrans%}</a></p>
+					</div>
+			  	</div>
+			</div>
+			<div class="card">
+			  	<div class="card-header" id="headingTwo">
+					<h5 class="mb-0">
+				  		<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							{%trans%}Download Mobile App{%endtrans%}
+						</button>
+					</h5>
+			  	</div>
+				{%if RACE%}
+			  	<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div class="card-body">
+						<img style="width:100%" src="{{ qrcode(url_for('mobile_app_download', _external=True)) }}">
+						<a href="{{url_for('mobile_app_download', _external=True)}}">{%trans%}Download{%endtrans%}</a>
+					</div>
+			  	</div>
+				{%endif%}
+			</div>
+		</div>
+    </div>
+</div>
+{% endblock %}
+    
+{% block script %}
+{% endblock %}
+
+

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+
+{% block body %}
+{%if IP%}
+    IP: {{IP}}
+    <h1>Changes for file data.txt</h1>
+    <p id="dateChange"></p>
+    <pre id="content"></pre>
+{%else%}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="container">
+            <div id="accordion">
+                {%for ip in GlobalSettings.getReaderIPs()%}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <a href="{{url_for('llrp', ip=ip)}}" class="btn btn-link">{{ip}}</a>
+                        </h5>
+                    </div>
+                </div>
+                {%endfor%}
+                <div class="card">
+                    <div class="card-header" id="headingConfig">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseConfig" aria-expanded="false" aria-controls="collapseConfig">
+                                {%trans%}Config{%endtrans%}
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseConfig" class="collapse" aria-labelledby="headingConfig" data-parent="#accordion">
+                        <div class="card-body">
+
+                            <form method='post'>
+                                <div class="col-md-12">
+                                    <select class="form-control" placeholder="{%trans%}Race select{%endtrans%}" name="reader-race">
+                                    {%for option in GlobalSettings.getRaceList()%}
+                                        <option {%if option==GlobalSettings.getReaderRace()%}selected{%endif%}>{{option}}</option>
+                                    {%endfor%}
+                                    </select>
+                                </div>
+                                <div class="col-md-12 mt-3">
+                                    <ul class="list-group">
+                                    {%for ip in GlobalSettings.getReaderIPs() %}
+                                        <li class="list-group-item">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="IP" name="reader-ip" value="{{ip|safe}}">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>				
+                                    {%endfor%}
+                                        <li class="list-group-item new d-none">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" placeholder="IP" name="reader-ip">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button" onclick="removeListItem(this)">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </li>				
+                                        <li class="list-group-item d-flex justify-content-center"><button class="btn btn-default" type="button" onclick="addListItem(this)"><i class="fa fa-plus"></i> {%trans%}Add{%endtrans%}</button></li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-12 mt-3"></div>
+                                    {% for option in GlobalSettings.getGlobalConfigKeys() %}
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label for="reader-{{option}}" class="col-sm-4 col-form-label">{{option|KeyTextTrans}}</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="reader-{{option}}" name="reader-{{option}}" placeholder="{{option|KeyTextTrans}}" value="{{GlobalSettings.getReaderConfig(option)}}">
+                                        </div>
+                                    </div>
+                                </div>
+                                {%endfor%}
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary btn-block" type="submit" name="race-ConfigSave">{%trans%}Save{%endtrans%}</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endif%}
+{% endblock %}
+
+{% block script %}
+{%if IP%}
+    <script src="{{ url_for("static", filename="js/poll.js") }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            StartPolling('/api/llrp/{{IP}}', function(data){
+                console.log(data)
+                $('#dateChange').text(data.date);
+                $('#content').text(data.content);
+            });
+        });
+    </script>
+{%endif%}
+{% endblock %}

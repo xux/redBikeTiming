@@ -1,0 +1,15 @@
+<footer class="page-footer font-small">
+	<div class="footer-copyright text-center py-3">
+		<a href="/about"> redBike</a> © 2023
+		<a href="{{request.url.replace('http://', 'https://')}}"><i class="fas fa-lock"></i></a> <a href="{{request.url.replace('https://', 'http://')}}"><i class="fas fa-lock-open"></i></a>
+{%if has_url_for('set_language') %}
+	{% for language in AVAILABLE_LANGUAGES.items() %}
+		{% if CURRENT_LANGUAGE == language[0] %}
+			{{ language[1] }}
+		{% else %}
+			<a href="{{ url_for('set_language', language=language[0]) }}" >{{ language[1] }}</a>
+		{%  endif %}
+	{% endfor %}
+{%endif%}
+	</div>
+</footer>
